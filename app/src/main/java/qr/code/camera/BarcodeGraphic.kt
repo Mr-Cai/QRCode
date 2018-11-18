@@ -1,4 +1,4 @@
-package qr.code
+package qr.code.camera
 
 import android.graphics.Canvas
 import android.graphics.Color
@@ -6,8 +6,6 @@ import android.graphics.Paint
 import android.graphics.RectF
 
 import com.google.android.gms.vision.barcode.Barcode
-
-import qr.code.camera.GraphicOverlay
 
 //用于在关联的图形叠加视图中呈现条形码位置,大小和ID的图形实例
 class BarcodeGraphic(overlay: GraphicOverlay<*>) : GraphicOverlay.Graphic(overlay) {

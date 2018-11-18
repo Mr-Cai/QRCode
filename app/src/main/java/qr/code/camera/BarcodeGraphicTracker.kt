@@ -1,15 +1,15 @@
-package qr.code
+package qr.code.camera
 
 import android.content.Context
 import androidx.annotation.UiThread
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.Tracker
 import com.google.android.gms.vision.barcode.Barcode
-import qr.code.camera.GraphicOverlay
 
 //通用跟踪器,用于跟踪或读取条形码(可复用)并接收新检测到的项目
-class BarcodeGraphicTracker internal constructor(private val mOverlay: GraphicOverlay<BarcodeGraphic>, private val mGraphic: BarcodeGraphic,
-                                                 context: Context) : Tracker<Barcode>() {
+class BarcodeGraphicTracker(private val mOverlay: GraphicOverlay<BarcodeGraphic>,
+                            private val mGraphic: BarcodeGraphic,
+                            context: Context) : Tracker<Barcode>() {
     private var mBarcodeUpdateListener: BarcodeUpdateListener? = null
 
     //通过在检测条码上实现更新接口方法,消耗从活动或碎片级别检测到的子项实例

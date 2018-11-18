@@ -9,6 +9,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.ViewGroup
 import androidx.annotation.RequiresPermission
+import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
 
 class CameraSourcePreview(private val mContext: Context, attrs: AttributeSet) : ViewGroup(mContext, attrs) {
@@ -97,11 +98,10 @@ class CameraSourcePreview(private val mContext: Context, attrs: AttributeSet) : 
             try {
                 startIfReady()
             } catch (se: SecurityException) {
-                Log.e(TAG, "Do not have permission to start the camera", se)
+                Snackbar.make(rootView, "相机未授权", 1000).show()
             } catch (e: IOException) {
-                Log.e(TAG, "Could not start camera source.", e)
+                Snackbar.make(rootView, "无法启动相机源", 1000).show()
             }
-
         }
 
         override fun surfaceDestroyed(surface: SurfaceHolder) {
@@ -117,15 +117,12 @@ class CameraSourcePreview(private val mContext: Context, attrs: AttributeSet) : 
         if (mCameraSource != null) {
             val size = mCameraSource!!.previewSize
             if (size != null) {
-
                 width = size.width
                 height = size.height
             }
         }
-
         if (isPortraitMode) { //纵向时交换宽度和高度尺寸，因为它将旋转90度
             val tmp = width
-
             width = height
             height = tmp
         }
@@ -138,20 +135,13 @@ class CameraSourcePreview(private val mContext: Context, attrs: AttributeSet) : 
             childHeight = layoutHeight
             childWidth = (layoutHeight.toFloat() / height.toFloat() * width).toInt()
         }
-        for (i in 0 until childCount) {
-            getChildAt(i).layout(0, 0, childWidth, childHeight)
-        }
+        for (i in 0 until childCount) getChildAt(i).layout(0, 0, childWidth, childHeight)
         try {
             startIfReady()
         } catch (se: SecurityException) {
-            Log.e(TAG, "相机未授权", se)
+            Snackbar.make(rootView, "相机未授权", 1000).show()
         } catch (e: IOException) {
-            Log.e(TAG, "无法启动相机源", e)
+            Snackbar.make(rootView, "无法启动相机源", 1000).show()
         }
-
-    }
-
-    companion object {
-        private val TAG = "CameraSourcePreview"
     }
 }
