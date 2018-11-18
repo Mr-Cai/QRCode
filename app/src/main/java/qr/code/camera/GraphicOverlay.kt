@@ -4,20 +4,16 @@ import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
-
-import java.util.HashSet
-import java.util.Vector
+import java.util.*
 
 class GraphicOverlay<T : GraphicOverlay.Graphic>(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private val mLock = Any()
     private var mPreviewWidth: Int = 0
     //返回水平比例因子
     var widthScaleFactor = 1.0f
-        private set
     private var mPreviewHeight: Int = 0
     //返回垂直比例因子
     var heightScaleFactor = 1.0f
-        private set
     private var mFacing = CameraSource.CAMERA_FACING_BACK
     private val mGraphics = HashSet<T>()
 
@@ -92,7 +88,6 @@ class GraphicOverlay<T : GraphicOverlay.Graphic>(context: Context, attrs: Attrib
 
     override fun onDraw(canvas: Canvas) { //使用关联的图形对象绘制叠加层
         super.onDraw(canvas)
-
         synchronized(mLock) {
             if (mPreviewWidth != 0 && mPreviewHeight != 0) {
                 widthScaleFactor = width.toFloat() / mPreviewWidth.toFloat()

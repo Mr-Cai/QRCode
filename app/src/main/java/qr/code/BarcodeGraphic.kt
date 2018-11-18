@@ -10,13 +10,11 @@ import com.google.android.gms.vision.barcode.Barcode
 import qr.code.camera.GraphicOverlay
 
 //用于在关联的图形叠加视图中呈现条形码位置,大小和ID的图形实例
-class BarcodeGraphic internal constructor(overlay: GraphicOverlay<*>) : GraphicOverlay.Graphic(overlay) {
-    private var mId: Int = 0
+class BarcodeGraphic(overlay: GraphicOverlay<*>) : GraphicOverlay.Graphic(overlay) {
+    private var id: Int = 0
     private val mRectPaint: Paint
     private val mTextPaint: Paint
-    @Volatile
-    internal var barcode: Barcode? = null
-        private set
+    var barcode: Barcode? = null
 
     init {
         mCurrentColorIndex = (mCurrentColorIndex + 1) % COLOR_CHOICES.size
@@ -31,7 +29,7 @@ class BarcodeGraphic internal constructor(overlay: GraphicOverlay<*>) : GraphicO
     }
 
     fun setId(id: Int) {
-        this.mId = id
+        this.id = id
     }
 
     internal fun updateItem(barcode: Barcode) { //从检测到最近的帧更新条形码实例,使叠加层的相关部分无效以触发重绘

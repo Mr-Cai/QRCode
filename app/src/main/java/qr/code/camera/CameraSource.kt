@@ -10,17 +10,13 @@ import android.util.Log
 import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.WindowManager
-
 import com.google.android.gms.common.images.Size
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.Frame
-
-import java.io.IOException
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy
 import java.nio.ByteBuffer
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 class CameraSource {
 
@@ -121,7 +117,7 @@ class CameraSource {
     }
 
     // 打开相机并开始将预览帧发送到底层检测器,提供的表面固定器用于预览,因此可以向用户显示帧.
-     fun start(surfaceHolder: SurfaceHolder) {
+    fun start(surfaceHolder: SurfaceHolder) {
         synchronized(mCameraLock) {
             if (mCamera != null) return
             mCamera = createCamera()
@@ -133,7 +129,7 @@ class CameraSource {
         }
     }
 
-     fun stop() { //关闭相机并停止向底层帧检测器发送帧。
+    fun stop() { //关闭相机并停止向底层帧检测器发送帧。
         synchronized(mCameraLock) {
             mFrameProcessor!!.setActive(false)
             if (mProcessingThread != null) {
@@ -389,10 +385,10 @@ class CameraSource {
             while (true) {
                 synchronized(mLock) {
                     while (mActive && mPendingFrameData == null) {
-                        try { // 等待从相机接收到下一帧，因为我们没有它。
+                        try { //等待从相机接收到下一帧，因为我们没有它。
                             mLock.wait()
                         } catch (e: InterruptedException) {
-                            Log.d(TAG, "Frame processing loop terminated.", e)
+                            Log.i(TAG, "帧处理循环终止", e)
                             return
                         }
 
