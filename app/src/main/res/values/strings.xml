@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">扫码案例</string>
+    <string name="ok">OK</string>
+    <string name="permission_camera_rationale">需要使用摄像头进行检测</string>
+    <string name="no_camera_permission">这个应用程序不能运行，因为它没有相机权限。应用程序现在将退出。</string>
+    <string name="low_storage_error">由于设备存储不足，无法下载人脸检测依赖项</string>
+    <string name="title_activity_main">扫码案例</string>
+    <string name="barcode_header">单击读取条码或二维码</string>
+    <string name="read_barcode">扫码</string>
+    <string name="auto_focus">自动对焦</string>
+    <string name="use_flash">使用闪光灯</string>
+    <string name="barcode_success">扫码成功</string>
+    <string name="barcode_failure">扫码失败</string>
+    <string name="barcode_error">"扫码错误%1$s"</string>
+</resources>
